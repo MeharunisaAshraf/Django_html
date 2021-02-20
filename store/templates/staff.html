@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block contentofpage %}
+<form action="/staff" method="POST">
+
+    <!--Loading cart.py-->
+    {% load cart %}
+    <p class="display-1"><b><h2>Orders List</h2></b></p>
+
+    <div class="container mt-3 mx-auto no-gutters">
+        <div class="row mb-4 mx-auto">
+            <div class="btn-block">
+                <a input type="button" style="max-width: 7rem;"
+                    class="float-right btn btn-secondary border form-control" href="/logout">Logout</a>
+            </div>
+            <!--All orders Displayed-->
+            <div class="card-rows col-lg-14 mx-auto">
+                <div class="row mb-4 mx-auto">
+                    {% for order in order %}
+
+                    <div class="card mx-auto mb-3" id="{{product.id}}"
+                        style="max-width: 17rem; background-color: #e0cbcd;">
+                        <b class="card-header">Order # {{order.id}}</b>
+                        <div class="card-body" style="max-width: 17rem; background-color: #faf2f3;">
+                            <p class="card-text"><b>Customer Name =</b> {{order.customer.Fname}}</p>
+                            <hr>
+                            <p class="card-text"><b>Items =</b> {{order.quantity}}</p>
+                            <hr>
+                            <p class="card-text"><b>Shipping Address =</b> {{order.address}}</p>
+                            <hr>
+                            <p class="card-text"><b>Phone Number =</b> {{order.phonenumber}}</p>
+                            <hr>
+                            <p class="card-text"><b>Order Placed at </b>{{order.date}}</p>
+                            <hr>
+                            <p class="card-text"><b>Payement = </b>{{order.quantity|multiply:order.price|currency}}</p>
+                            {% if order.status %}
+
+                            <td><small class="badge badge-success">Completed</small></td>
+
+                            {%else%}
+
+                            <td><small class="badge badge-warning">Pending</small></td>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

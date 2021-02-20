@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block contentofpage %}
+
+<div class="container">
+    <div class="p-2 m-2">
+        <div class="col-lg-4 border mb-4 mt-4 mx-auto rounded pt-4">
+            <form action="/signup" method="POST">
+
+                {% csrf_token %}
+                <!-- Error Alert -->
+                {% if error%}
+                <div class="alert alert-dark" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+
+                <!-- Fname & Lname -->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="">First Name</label>
+                        <input required type="text" name="Fname" value="{{values.Fname}}"
+                            class="form-control-sm form-control">
+                    </div>
+                    <div class="col">
+                        <label for="">Last Name</label>
+                        <input required type="text" name="Lname" value="{{values.Lname}}"
+                            class="form-control-sm form-control">
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input required type="email" name="Email" value="{{values.Email}}"
+                        class=" form-control-sm form-control" placeholder="example@gmail.com">
+                </div>
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input required type="password" name="Password" id="" class="form-control form-control-sm"
+                        placeholder="########">
+                </div>
+
+                <!-- Phone-->
+                <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input required type="text" name="PhoneNumber" value="{{values.PhoneNumber}}"
+                        class=" form-control-sm form-control">
+                </div>
+
+                <!-- Address-->
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input required type="text" id="" name="Address" value="{{values.Address}}"
+                        class=" form-control-sm form-control">
+                </div>
+
+                <!-- State , City , ZipCode-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="">State</label>
+                        <input required type="text" name="State" value="{{values.State}}"
+                            class="form-control-sm form-control">
+                    </div>
+                    <div class="col">
+                        <label for="">City</label>
+                        <input required type="text" name="City" value="{{values.City}}"
+                            class="form-control-sm form-control">
+                    </div>
+                    <div class="col">
+                        <label for="">Zip Code</label>
+                        <input required type="text" name="ZipCode" placeholder="12345" value="{{values.ZipCode}}"
+                            class="form-control-sm form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info col-lg-4 pt-1 mt-4" type="submit" value="Create Account">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,291 @@
+{% block contentofpage %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- for text on picture -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- for contact card -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- for icons -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/all.min.css">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="shortcut icon" href="/product/images/icon1.png" type="image/png">
+  <title>My Art Gallery</title>
+</head>
+
+<body>
+  <!--Nav Bar-->
+  <div class="pos-f-t">
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #53383c;">
+
+
+
+      <a class="navbar-brand text-white ">
+        <span style="font-size:20px;cursor:pointer" onclick="openNav()"><i class="fa fa-info-circle"></i>
+          <b> About Us </b></a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item active">
+            <a class="nav-link text-white" href="/home"><i class="fa fa-home"></i> Home <span
+                class="sr-only">(current)</span></a>
+          </li>
+
+          <!-- for showing and hiding nav bar i am using this if/else here, used request.session bcz i have stored it in session in viwes.py #155 -->
+          {% if request.session.customer_id %}
+
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/logout"><i class="fa fa-lock"></i>Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/orders"><i class="fa fa-sort"></i>Orders</a>
+          </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/login"><i class="fa fa-address-card"></i> Staff</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/login"><i class="fa fa-sign-in"></i>Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/signup"><i class="fa fa-user-plus"></i>Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="http://mehrunisaashraf.pythonanywhere.com/admin/login/?next=/admin/">
+              <i class="fa fa-lock"></i>Admin</a>
+          </li>
+
+          {% endif %}
+
+        </ul>
+
+      </div>
+    </nav>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+<!-- slider from top to bottom nav bar -->
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- for icons -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/all.min.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      max-height: 500px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+
+    button:hover,
+    a:hover {
+      opacity: 0.7;
+    }
+
+    .overlay {
+      height: 0%;
+      width: 100%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow-y: hidden;
+      transition: 0.5s;
+    }
+
+    .overlay-content {
+      position: relative;
+      top: 25%;
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .overlay a:hover,
+    .overlay a:focus {
+      color: #f1f1f1;
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 60px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .overlay {
+        overflow-y: auto;
+      }
+
+      .overlay a {
+        font-size: 20px
+      }
+
+      .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+      <div class="row">
+        <div class="card m-10 ">
+          <img src="/product/images/Me.jpg" alt="John" style="width:100%">
+          <h3><b>MeharuNisa</h3></b>
+          <div style="margin: 2px 0;">
+            <a style="background-color: #dfd7d8;" href="http://www.linkedin.com/in/meharunisa-ashraf-501271184"><i
+                class="fa fa-linkedin"></i></a>
+            <a style=" background-color: #dfd7d8;" href="https://github.com/MeharunisaAshraf"><i
+                class="fa fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card m-10">
+          <img src="/product/images/hamda.jpg" alt="John" style="width:100%">
+          <h3><b>Hamda Anees</h3></b>
+          <div style="margin: 2px 0;">
+            <a style="background-color: #dfd7d8;" href="https://www.linkedin.com/in/hamda-anees"><i
+                class="fa fa-linkedin"></i></a>
+            <a style="background-color: #dfd7d8;" href="https://github.com/HamdaAnees"><i class="fa fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.height = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.height = "0%";
+    }
+  </script>
+
+
+
+
+
+  <!-- pictures grid -->
+
+  <style>
+    body,
+    html {
+      height: 50%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .hero-text {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+  </style>
+
+  <body>
+    <div class="hero-text">
+      <h style="font-size:70px">WELCOME TO ART GALLERY</h>
+      <p>©Copyrights Reserved {% now "Y" %}</p>
+    </div>
+  </body>
+  <img src="/product/images/19.jpg" style="width:100%">
+
+  </html>
+
+
+  {% endblock %}

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block contentofpage %}
+
+<!--Loading cart.py-->
+{% load cart %} 
+
+<!--Home page-->
+<div class="container mt-3 no-gutters">
+  <div class="row">
+    <!--Filters of catalogue-->
+    <div class="col-lg-3 mx-auto">
+
+      <!--side bar-->
+      <div class="list-group ">
+
+        <div class="list-group ">
+          <a href="/home" class="list-group-item list-group-item-action" style="background-color: #faf2f3;"><b>All Products</b></a>
+          {% for catalogue in catalogues %}
+          <a href="/home?catalogueID={{catalogue.id}}" class="list-group-item list-group-item-action"
+            style="background-color: #faf2f3;"><b>{{catalogue.name}}</b></a>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+    <!--All Products Displayed-->
+    <div class="card-rows col-lg-9 mx-auto">
+      <div class="row mx-auto">
+        {% for product in product %}
+
+        <style>
+          img {border: 1px solid #ddd;border-radius:4px; padding: 5px;width: 150px;}
+          img:hover {box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);}
+          </style>
+        <div class="card mx-auto mb-3" id="{{product.id}}" style="max-width: 16rem; background-color: #faf2f3;">
+          <img class="card-img-top" href="{{product.image.url}}" src={{product.image.url}} alt="Forest"
+          style="height:250px ; width:250px;">
+
+          <div class="btn-block">            
+            <a input type="button" style="background-color: #7e5b61;"  class="float-right btn btn-secondary border form-control" href="{{product.image.url}}">Quick View</a>
+          </div>
+
+
+          <b class="card-header">{{product.name}}</b>
+          <div class="card-body">
+            <!-- <p class="card-title">{{product.catalogue}}</p> -->
+            <p class="card-text">{{product.description}}</p><hr>
+            <p class="card-text"><b>{{product.price|currency}}</b></p>
+
+
+            <!--Passing product to the function product_is_in_cart in cart.py-->            
+            {{product | product_is_in_cart:request.session.cart}}
+
+            <!--Cart Form-->
+            <div class="card-footer p-0 no-gutters">
+
+              {% if product|product_is_in_cart:request.session.cart %}
+              <!--for quantity after adding to cart-->
+              <div class="row">
+                <!--For decreasing quantity-->
+                <form action="/home#{{product.id}}" class="col-4" method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" name="product" value='{{product.id}}'>
+                  <input hidden type="text" name="decrease" value='{{product.id}}'>
+                  <input type="submit" style="background-color: #7e5b61;" value="-" class="btn btn-block btn-secondary">
+                </form>
+                
+                <!--For showing exact quantity in cart-->
+                <div class="text-center col">{{product|product_quantity_in_cart:request.session.cart}}</div>
+                
+                <!--For increasing quantity-->
+                <form action="/home#{{product.id}}" class="col-4" method="POST">
+                  {% csrf_token %}
+                  <input hidden type="text" name="product" value='{{product.id}}'>
+                  <input type="submit" style="background-color: #7e5b61;" value="+" class="btn btn-block btn-secondary">
+                </form>
+              </div> 
+
+              {% else %}
+              
+              <!--to add in cart-->
+              <form action="/home#{{product.id}}" method="POST" class="btn-block">
+                {% csrf_token %}
+                <input hidden type="text" name="product" value='{{product.id}}'>
+                <input type="submit" style="background-color: #7e5b61;" name="product.id" class="float-right btn btn-secondary border form-control" 
+                value="Add to Cart"></a>
+              </form>
+
+              {% endif %}
+
+            </div>        
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

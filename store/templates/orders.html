@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block contentofpage %}
+
+<!--Loading cart.py-->
+{% load cart %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- for icons -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/all.min.css">
+
+<!--Home page-->
+<div class="container">
+    <div class="border rounded p-4 m-4">
+      <p class="display-1"><h2><i class="fa fa-th-list"></i><b>     Your Orders List</b></h2></p>
+
+<!-- table -->
+      <table class="table">
+<!-- header -->
+        <thead>
+          <tr>
+            <th>Sno.</th>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+<!-- body -->
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td><img src="{{order.product.image.url}}" style="height:60px ; width:60px;" class="square" alt=""></td>
+            <td>{{order.product.name}}</td>
+            <td>{{order.date}}</td>
+            <td>{{order.price|currency}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.quantity|multiply:order.price|currency}}</td>
+
+            {% if order.status %}
+
+            <td><small class="badge badge-success">Completed</small></td>
+
+            {%else%}
+
+            <td><small class="badge badge-warning">Pending</small></td>
+
+            {% endif %}
+
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+<!-- footer
+        <tfoot>
+          <tr>
+            <th class="text-right" colspan="4">Total</th>
+            <th>{{product|total_cart_price:request.session.cart|currency}}</th>
+          </tr>
+        </tfoot>
+      </table> -->
+
+      <!-- <div class=" p-4 m-4">
+        <a href="#" data-toggle="modal" data-target="#exampleModal" 
+        class="btn btn-outline-info border rounded  col-lg-3 float-right">Check Out</a>        
+      </div> -->
+
+    </div>
+
+</div>
+
+{% endblock %}
